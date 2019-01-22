@@ -1,0 +1,337 @@
+/**
+@author Arshak Khachatrian (<a href="mailto:akhxtern@gmail.com">akhxtern@gmail.com</a>)
+@website http://spacee.xyz
+@updateDate July 26, 2017
+
+**********
+*
+*   *** PAPER FAB MENU ***
+*
+*   This floating action button is using the Material Design concept of expandable
+*   Paper Fab Button and using the Polymer components to make the concept happen.
+*
+*   *** EXAMPLE - without links ***
+*   <paper-fab-menu color="teal" icon="add" position="vertical">
+*        <paper-fab mini icon="star" ></paper-fab>
+*        <paper-fab mini icon="star" ></paper-fab>
+*        <paper-fab mini icon="star" ></paper-fab>
+*   </paper-fab-menu>
+*
+*   *** EXAMPLE - with links ***
+*
+*   <paper-fab-menu color="red" icon="add" position="horizontal">
+*        <a href="#/favorites">
+*            <paper-fab mini icon="star" ></paper-fab>
+*        </a>
+*        <a href="#/favorites">
+*            <paper-fab mini icon="star" ></paper-fab>
+*        </a>
+*        <a href="#/favorites">
+*            <paper-fab mini icon="star" ></paper-fab>
+*        </a>
+*   </paper-fab-menu>
+*
+**********
+
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+/**
+ * `paper-fab-menu`
+ * 
+ *
+ * @customElement
+ * @polymer
+ * @demo demo/index.html
+ */
+class PaperFabMenu extends Polymer.Element {
+  static get template() {
+    return Polymer.html`
+  <style include="iron-flex iron-flex-alignment">
+    :host {
+    }
+
+    :host .layout {
+    }
+
+    :host([position="vertical"]) .menu-fab-button {
+      padding-top: 7px;
+    }
+
+    :host([position="vertical reversed"]) .menu-fab-button {
+      padding-bottom: 7px;
+    }
+
+    :host([position="horizontal"]) .menu-fab-button {
+      padding-left: 7px;
+    }
+
+    :host([position="horizontal reversed"]) .menu-fab-button {
+      padding-right: 7px;
+    }
+
+    :host-context([dir="rtl"]) :host([position="horizontal"]) .menu-fab-button,
+    :host-context([dir="rtl"])[position="horizontal"] .menu-fab-button, /* Polymer workaround */
+    :host([dir="rtl"][position="horizontal"]) .menu-fab-button {
+      padding-left: 0;
+      padding-right: 7px;
+    }
+
+    :host-context([dir="rtl"]) :host([position="horizontal reversed"]) .menu-fab-button,
+    :host-context([dir="rtl"])[position="horizontal reversed"] .menu-fab-button, /* Polymer workaround */
+    :host([dir="rtl"][position="horizontal reversed"]) .menu-fab-button {
+      padding-right: 0;
+      padding-left: 7px;
+    }
+
+    paper-fab {
+      --paper-fab-iron-icon: {
+        -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+        -webkit-transition: 200ms all;
+                transition: 200ms all;
+      }
+    }
+
+    :host([opened]) paper-fab {
+      --paper-fab-iron-icon: {
+        -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+        -webkit-transition: 200ms all;
+                transition: 200ms all;
+      }
+    }
+
+    .menu-items {
+      -webkit-box-ordinal-group: 2;
+          -ms-flex-order: 1;
+              order: 1;
+      /* This prevents the browser window's scroll bar to sometimes appear
+      * when the menu is closed.
+      */
+      /*overflow: hidden;*/
+    }
+
+    .menu-fab-button {
+      -webkit-box-ordinal-group: 3;
+          -ms-flex-order: 2;
+              order: 2;
+    }
+
+    .menu-items ::slotted(*) {
+      margin: 7px;
+      -webkit-transform: scale(0);
+              transform: scale(0);
+    }
+
+    :host([opened]) .menu-items ::slotted(*) {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+
+    .menu-items ::slotted(*:nth-child(1)) {
+      -webkit-transition-delay: 250ms;
+              transition-delay: 250ms;
+    }
+
+    .menu-items ::slotted(*:nth-child(2)) {
+      -webkit-transition-delay: 200ms;
+              transition-delay: 200ms;
+    }
+
+    .menu-items ::slotted(*:nth-child(3)) {
+      -webkit-transition-delay: 150ms;
+              transition-delay: 150ms;
+    }
+
+    .menu-items ::slotted(*:nth-child(4)) {
+      -webkit-transition-delay: 100ms;
+              transition-delay: 100ms;
+    }
+
+    .menu-items ::slotted(*:nth-child(5)) {
+      -webkit-transition-delay: 50ms;
+              transition-delay: 50ms;
+    }
+
+    .menu-items ::slotted(*:nth-child(6)) {
+      -webkit-transition-delay: 0ms;
+              transition-delay: 0ms;
+    }
+
+    .menu-items ::slotted(*) {
+      -webkit-transition: 100ms all;
+      transition: 100ms all;
+    }
+
+    /*REVERSED-STYLE-START*/
+
+    .menu-items.reversed {
+      -webkit-box-ordinal-group: 4;
+          -ms-flex-order: 3;
+              order: 3;
+    }
+
+    .menu-items.reversed ::slotted(a:nth-child(1)) {
+      -webkit-transition-delay: 0ms;
+              transition-delay: 0ms;
+    }
+
+    .menu-items.reversed ::slotted(a:nth-child(2)) {
+      -webkit-transition-delay: 50ms;
+              transition-delay: 50ms;
+    }
+
+    .menu-items.reversed ::slotted(a:nth-child(3)) {
+      -webkit-transition-delay: 100ms;
+              transition-delay: 100ms;
+    }
+
+    .menu-items.reversed ::slotted(a:nth-child(4)) {
+      -webkit-transition-delay: 150ms;
+              transition-delay: 150ms;
+    }
+
+    .menu-items.reversed ::slotted(a:nth-child(5)) {
+      -webkit-transition-delay: 200ms;
+              transition-delay: 200ms;
+    }
+
+    .menu-items.reversed ::slotted(a:nth-child(6)) {
+      -webkit-transition-delay: 250ms;
+              transition-delay: 250ms;
+    }
+
+    /*REVERSED-STYLE-END*/
+
+    paper-fab {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      -webkit-animation: 300ms scale 300ms 1 forwards alternate cubic-bezier(0.165, 0.84, 0.44, 1);
+              animation: 300ms scale 300ms 1 forwards alternate cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    :host(:not([opened])) .menu-items {
+      -webkit-animation: 0s delayed-disappearance 300ms 1 forwards;
+              animation: 0s delayed-disappearance 300ms 1 forwards;
+    }
+
+    @-webkit-keyframes scale {
+      0% {
+        transform        : scale(0);
+        -webkit-transform: scale(0);
+      }
+      100% {
+        transform        : scale(1.0);
+        -webkit-transform: scale(1.0);
+      }
+    }
+
+    @keyframes scale {
+      0% {
+        transform        : scale(0);
+        -webkit-transform: scale(0);
+      }
+      100% {
+        transform        : scale(1.0);
+        -webkit-transform: scale(1.0);
+      }
+    }
+
+    @-webkit-keyframes delayed-disappearance {
+      from {
+        height: auto;
+        width: auto;
+      }
+      to   {
+        height: 0;
+        width: 0;
+      }
+    }
+
+    @keyframes delayed-disappearance {
+      from {
+        height: auto;
+        width: auto;
+      }
+      to   {
+        height: 0;
+        width: 0;
+      }
+    }
+  </style>
+  <div class\$="flex layout [[ position ]]">
+    <div id="mainFab" class="menu-fab-button layout vertical self-center">
+      <paper-fab id="paperFab" src\$="[[ _computeSrc ]]" icon\$="[[ _computeIcon(icon) ]]"></paper-fab>
+    </div>
+    <div id="mainItems" class\$="menu-items layout [[ position ]] self-center">
+      <slot name="menu-item"></slot>
+    </div>
+  </div>
+`;
+  }
+
+  static get is() { return 'paper-fab-menu'; }
+
+  static get properties() {
+    return {
+      position: {
+        type: String,
+        value: 'vertical' // ALLOWED: 'vertical', 'horizontal', 'vertical reversed', 'horizontal reversed'
+      },
+      opened: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true,
+      },
+      color: {
+        type: String // any color you would like to be a main paper-fab
+      },
+      icon: {
+        type: String
+      },
+      src: {
+        type: String
+      }
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.$.mainFab.addEventListener('mouseover', e => this.open(e));
+    this.$.mainFab.addEventListener('mouseout', e => this.close(e));
+    this.$.mainItems.addEventListener('mouseover', e => this.open(e));
+    this.$.mainItems.addEventListener('mouseout', e => this.close(e));
+    if (this.color) {
+      this.$.paperFab.style.backgroundColor = this.color;
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.$.mainFab.removeEventListener('mouseover', e => this.open(e));
+    this.$.mainFab.removeEventListener('mouseout', e => this.close(e));
+    this.$.mainItems.removeEventListener('mouseover', e => this.open(e));
+    this.$.mainItems.removeEventListener('mouseout', e => this.close(e));
+  }
+
+  open() {
+    this.opened = true;
+  }
+
+  close() {
+    this.opened = false;
+  }
+
+  _computeIcon(icon) {
+    return icon !== "" ? icon : "";
+  }
+
+  _computeSrc(src) {
+    return src !== "" ? src : "";
+  }
+}
+window.customElements.define(PaperFabMenu.is, PaperFabMenu);
