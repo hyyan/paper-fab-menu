@@ -32,8 +32,14 @@
 *   </paper-fab-menu>
 *
 **********
-
 */
+
+import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
+import '@polymer/iron-icons/iron-icons.js';
+import '@polymer/paper-fab/paper-fab.js';
+import '@polymer/paper-tooltip/paper-tooltip.js';
+import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
+
 /*
   FIXME(polymer-modulizer): the above comments were extracted
   from HTML and may be out of place here. Review them and
@@ -41,15 +47,15 @@
 */
 /**
  * `paper-fab-menu`
- * 
+ *
  *
  * @customElement
  * @polymer
  * @demo demo/index.html
  */
-class PaperFabMenu extends Polymer.Element {
+class PaperFabMenu extends PolymerElement {
   static get template() {
-    return Polymer.html`
+    return html`
   <style include="iron-flex iron-flex-alignment">
     :host {
     }
